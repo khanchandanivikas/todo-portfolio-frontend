@@ -38,7 +38,7 @@ export const completeTodo = (id) => {
 export const fetchLoadTodos = (todoType) => {
   return function (dispatch) {
     axios
-      .get(process.env.REACT_APP_BACKEND_URL + `/api/todo/${todoType}`)
+      .get(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/${todoType}`)
       .then((response) => {
         dispatch(getAllTodos(response.data));
       })
@@ -51,7 +51,7 @@ export const fetchLoadTodos = (todoType) => {
 export const fetchAddTodo = (todo) => {
   return function (dispatch) {
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + `/api/todo/`, todo)
+      .post(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/`, todo)
       .then((response) => {
         dispatch(addTodo(response.data.todo));
       })
@@ -64,7 +64,7 @@ export const fetchAddTodo = (todo) => {
 export const fetchRemoveTodo = (id) => {
   return function (dispatch) {
     axios
-      .delete(process.env.REACT_APP_BACKEND_URL + `/api/todo/${id}`)
+      .delete(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/${id}`)
       .then(() => {
         dispatch(removeTodo(id));
       })
@@ -78,7 +78,7 @@ export const fetchClearCompletedTodos = () => {
   return function (dispatch) {
     axios
       .delete(
-        process.env.REACT_APP_BACKEND_URL + "/api/todo/delete/deleteCompleted"
+        process.env.REACT_APP_BACKEND_URL + "/api/todoportfolio/delete/deleteCompleted"
       )
       .then(() => {
         dispatch(clearCompletedTodos());
@@ -93,7 +93,7 @@ export const fetchCompleteTodo = (id, status) => {
   return function (dispatch) {
     console.log(status)
     axios
-      .put(process.env.REACT_APP_BACKEND_URL + `/api/todo/complete/${id}`, {
+      .put(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/complete/${id}`, {
         complete: status,
       })
       .then(() => {
