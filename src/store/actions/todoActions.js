@@ -38,7 +38,7 @@ export const completeTodo = (id) => {
 export const fetchLoadTodos = (todoType) => {
   return function (dispatch) {
     axios
-      .get(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/${todoType}`)
+      .get(process.env.REACT_APP_BACKEND_URL + `/api/todoPortfolio/${todoType}`)
       .then((response) => {
         dispatch(getAllTodos(response.data));
       })
@@ -51,7 +51,7 @@ export const fetchLoadTodos = (todoType) => {
 export const fetchAddTodo = (todo) => {
   return function (dispatch) {
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/`, todo)
+      .post(process.env.REACT_APP_BACKEND_URL + `/api/todoPortfolio/`, todo)
       .then((response) => {
         dispatch(addTodo(response.data.todo));
       })
@@ -64,7 +64,7 @@ export const fetchAddTodo = (todo) => {
 export const fetchRemoveTodo = (id) => {
   return function (dispatch) {
     axios
-      .delete(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/${id}`)
+      .delete(process.env.REACT_APP_BACKEND_URL + `/api/todoPortfolio/${id}`)
       .then(() => {
         dispatch(removeTodo(id));
       })
@@ -78,7 +78,7 @@ export const fetchClearCompletedTodos = () => {
   return function (dispatch) {
     axios
       .delete(
-        process.env.REACT_APP_BACKEND_URL + "/api/todoportfolio/delete/deleteCompleted"
+        process.env.REACT_APP_BACKEND_URL + "/api/todoPortfolio/delete/deleteCompleted"
       )
       .then(() => {
         dispatch(clearCompletedTodos());
@@ -90,13 +90,14 @@ export const fetchClearCompletedTodos = () => {
 };
 
 export const fetchCompleteTodo = (id, status) => {
+  console.log(status)
   return function (dispatch) {
-    console.log(status)
     axios
-      .put(process.env.REACT_APP_BACKEND_URL + `/api/todoportfolio/complete/${id}`, {
+      .put(process.env.REACT_APP_BACKEND_URL + `/api/todoPortfolio/complete/${id}`, {
         complete: status,
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         dispatch(completeTodo(id));
       })
       .catch((res) => {

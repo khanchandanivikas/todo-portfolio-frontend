@@ -88,6 +88,7 @@ const ListItems = styled.ul`
 const TodoList = () => {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todos);
+  console.log(todoList)
   return (
     <main>
       <ListItems>
@@ -100,7 +101,7 @@ const TodoList = () => {
                 <span className="input-wrapper">
                   <input
                     onClick={() =>
-                      dispatch(fetchCompleteTodo(todo.id, !todo.complete))
+                      dispatch(fetchCompleteTodo(todo.id, !(JSON.parse(todo.complete))))
                     }
                     type="checkbox"
                     className="styled-checkbox"
