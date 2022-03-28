@@ -23,54 +23,6 @@ const ListItems = styled.ul`
     font-size: 0.9rem;
   }
 
-  li {
-    padding: 1rem 0;
-    border-bottom: 1px solid ${(props) => props.theme.color.list.borderBottom};
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: border-bottom 0.5s ease;
-
-    &:last-of-type {
-      border-bottom: none;
-    }
-
-    .input-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      input {
-        appearance: none;
-        width: 1.5rem;
-        height: 1.5rem;
-        border: 1px solid ${(props) => props.theme.color.list.checkbox};
-        border-radius: 50%;
-        background-color: transparent;
-        margin-right: 2rem;
-        transition: all 0.3s ease;
-
-        &:hover {
-          border: 1px solid hsl(220, 98%, 61%);
-          cursor: pointer;
-        }
-
-        &:checked {
-          background-color: #711a78;
-          position: relative;
-
-          &::before {
-            position: absolute;
-            content: "✓";
-            color: #fff;
-            left: 5px;
-            top: 2px;
-            font-weight: 600;
-          }
-        }
-      }
-    }
-
     .fa-xmark {
       color: ${(props) => props.theme.color.list.deteteBtn};
       font-size: 1.5rem;
@@ -85,35 +37,84 @@ const ListItems = styled.ul`
   }
 `;
 
+const ListItem = styled.li`
+  padding: 1rem 0;
+  border-bottom: 1px solid ${(props) => props.theme.color.list.borderBottom};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-bottom 0.5s ease;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+`;
+
+const ListItemInfo = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Checkbox = styled.input`
+appearance: none;
+width: 1.5rem;
+height: 1.5rem;
+border: 1px solid ${(props) => props.theme.color.list.checkbox};
+border-radius: 50%;
+background-color: transparent;
+margin-right: 2rem;
+transition: all 0.3s ease;
+
+&:hover {
+  border: 1px solid hsl(220, 98%, 61%);
+  cursor: pointer;
+}
+
+&:checked {
+  background-color: #711a78;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: "✓";
+    color: #fff;
+    left: 5px;
+    top: 2px;
+    font-weight: 600;
+  }
+`;
+
 const TodoList = () => {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todos);
-  console.log(todoList)
   return (
     <main>
       <ListItems>
         {todoList.todos === "no result" || todoList.todos.length < 1 ? (
-          <li style={{ justifyContent: "center" }}>No result</li>
+          <li style={{ textAlign: "center", padding: "1rem 0" }}>No result</li>
         ) : (
           todoList.todos.map((todo) => {
             return (
-              <li key={todo.id}>
-                <span className="input-wrapper">
-                  <input
+              <ListItem key={todo.id}>
+                <ListItemInfo>
+                  <Checkbox
                     onClick={() =>
-                      dispatch(fetchCompleteTodo(todo.id, !(JSON.parse(todo.complete))))
+                      dispatch(
+                        fetchCompleteTodo(todo.id, !JSON.parse(todo.complete))
+                      )
                     }
                     type="checkbox"
                     className="styled-checkbox"
                     checked={todo.complete.toString() === "true"}
                   />
                   <label htmlFor="">{todo.task}</label>
-                </span>
+                </ListItemInfo>
                 <i
                   onClick={() => dispatch(fetchRemoveTodo(todo.id))}
                   className="fa-solid fa-xmark"
                 ></i>
-              </li>
+              </ListItem>
             );
           })
         )}

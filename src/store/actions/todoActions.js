@@ -90,7 +90,6 @@ export const fetchClearCompletedTodos = () => {
 };
 
 export const fetchCompleteTodo = (id, status) => {
-  console.log(status)
   return function (dispatch) {
     axios
       .put(process.env.REACT_APP_BACKEND_URL + `/api/todoPortfolio/complete/${id}`, {

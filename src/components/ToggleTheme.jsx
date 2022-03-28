@@ -10,7 +10,9 @@ const ThemeContainer = styled.div`
   color: #fff;
   width: 100%;
   box-shadow: 0px 35px 50px -15px rgba(0, 0, 0, 0.5);
+`;
 
+const Heading = styled.h1`
   h1 {
     font-size: 2.5rem;
     letter-spacing: 1.2rem;
@@ -20,15 +22,15 @@ const ThemeContainer = styled.div`
       letter-spacing: 1rem;
     }
   }
+`;
 
-  button {
-    outline: none;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    font-size: 1.5rem;
-  }
+const ThemeButton = styled.button`
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5rem;
 `;
 
 const ToggleTheme = () => {
@@ -37,14 +39,14 @@ const ToggleTheme = () => {
 
   return (
     <ThemeContainer>
-      <h1>TODO</h1>
-      <button onClick={() => dispatch(toggleTheme())}>
+      <Heading>TODO</Heading>
+      <ThemeButton onClick={() => dispatch(toggleTheme())}>
         {theme === "dark" ? (
           <i className="fa-solid fa-sun"></i>
         ) : (
           <i className="fa-solid fa-moon"></i>
         )}
-      </button>
+      </ThemeButton>
     </ThemeContainer>
   );
 };

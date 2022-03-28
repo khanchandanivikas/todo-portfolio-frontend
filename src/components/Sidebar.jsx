@@ -4,7 +4,7 @@ import styled from "styled-components";
 import desktopDark from "../images/bg-desktop-dark.jpg";
 import desktopLight from "../images/bg-desktop-light.jpg";
 
-const Sidebarr = styled.div`
+const Aside = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -15,13 +15,13 @@ const Sidebarr = styled.div`
 const Sidebar = () => {
   const theme = useSelector((state) => state.theme);
   return (
-    <Sidebarr
+    <Aside
       style={{
         backgroundImage: `url(${
           theme === "dark" ? desktopDark : desktopLight
         })`,
       }}
-    ></Sidebarr>
+    ></Aside>
   );
 };
 

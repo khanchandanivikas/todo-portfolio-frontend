@@ -26,54 +26,47 @@ const FilterBox = styled.div`
   p {
     padding-top: 0.3rem;
   }
+`;
 
-  button {
-    background: transparent;
-    color: ${(props) => props.theme.color.filter.text};
-    border: none;
-    outline: none;
-    padding: 5px;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: color 0.3s ease;
+const Button = styled.button`
+  background: transparent;
+  color: ${(props) => props.theme.color.filter.text};
+  border: none;
+  outline: none;
+  padding: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
 
-    &:hover {
-      color: ${(props) => props.theme.color.filter.hover};
-    }
+  &:hover {
+    color: ${(props) => props.theme.color.filter.hover};
+  }
+`;
 
-    @media only screen and (max-width: 600px) {
-      text-align: end;
-    }
+const ClearButton = styled(Button)`
+  @media only screen and (max-width: 600px) {
+    text-align: end;
+  }
+`;
+
+const FilterButton = styled(Button)`
+  @media only screen and (max-width: 600px) {
+    text-align: end;
   }
 
-  .filter-options {
-    @media only screen and (max-width: 600px) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      order: 3;
-      grid-column: 1/-1;
-      padding-top: 1rem;
-    }
+  &.active {
+    color: #3a7cfd;
+  }
+`;
 
-    button {
-      background: transparent;
-      color: ${(props) => props.theme.color.filter.text};
-      border: none;
-      outline: none;
-      padding: 5px;
-      margin: 0 5px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        color: ${(props) => props.theme.color.filter.hover};
-      }
-
-      &.active {
-        color: #3a7cfd;
-      }
-    }
+const FilterOptions = styled.div`
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 3;
+    grid-column: 1/-1;
+    padding-top: 1rem;
   }
 `;
 
@@ -87,30 +80,32 @@ const Filter = () => {
 
   return (
     <FilterBox>
-      <p>{todoList.todos.length} items left</p>
-      <div className="filter-options">
-        <button
+      <p>
+        {todoList.todos !== "no result" ? todoList.todos.length : 0} items left
+      </p>
+      <FilterOptions>
+        <FilterButton
           className={todoType === "" && "active"}
           onClick={() => showTodo("")}
         >
           All
-        </button>
-        <button
+        </FilterButton>
+        <FilterButton
           className={todoType === "incomplete" && "active"}
           onClick={() => showTodo("incomplete")}
         >
           Active
-        </button>
-        <button
+        </FilterButton>
+        <FilterButton
           className={todoType === "complete" && "active"}
           onClick={() => showTodo("complete")}
         >
           Completed
-        </button>
-      </div>
-      <button onClick={() => dispatch(fetchClearCompletedTodos())}>
+        </FilterButton>
+      </FilterOptions>
+      <ClearButton onClick={() => dispatch(fetchClearCompletedTodos())}>
         Clear Completed
-      </button>
+      </ClearButton>
     </FilterBox>
   );
 };
