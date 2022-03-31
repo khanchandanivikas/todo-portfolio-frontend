@@ -95,8 +95,7 @@ export const fetchCompleteTodo = (id, status) => {
       .put(process.env.REACT_APP_BACKEND_URL + `/api/todoPortfolio/complete/${id}`, {
         complete: status,
       })
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         dispatch(completeTodo(id));
       })
       .catch((res) => {
